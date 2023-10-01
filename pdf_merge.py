@@ -142,6 +142,10 @@ class MergePdf(TkinterDnD.Tk):
                 
         filename = fd.askopenfilename(title="Select a Pdf File", initialdir=initialdir, filetypes=filetype)
         if filename != "":
+            if Path(filename).suffix == "":
+                filename += ".pdf"
+            else:
+                filename = filename.replace(Path(filename).suffix, ".pdf")
             print(filename)
             self.merge_pdf.delete(0, tk.END)
             self.merge_pdf.insert(0, filename)
@@ -155,6 +159,10 @@ class MergePdf(TkinterDnD.Tk):
         filename = fd.asksaveasfilename(title="Select a Pdf File", initialdir=initialdir, filetypes=filetype, confirmoverwrite=cfg.get(cfg_confirm_overwrite_str))
         
         if filename != "":
+            if Path(filename).suffix == "":
+                filename += ".pdf"
+            else:
+                filename = filename.replace(Path(filename).suffix, ".pdf")
             print(filename)
             self.dest_pdf.delete(0, tk.END)
             self.dest_pdf.insert(0, filename)
